@@ -4,6 +4,7 @@
 #include "Attraction.h"
 #include <queue>
 #include <string>
+#include "Structure.hpp"
 
 class Parc {
 public:
@@ -14,7 +15,7 @@ public:
 	void AfficherDetails() const;
 
 	// Destructeur
-	~Attraction();
+	~Parc();
 
 private:
 	// Membres privés
@@ -23,5 +24,5 @@ private:
 	std::vector<Attraction> Attractions;
 };
 
-#endif // PERSONNE_HPP
+#endif // PARC_HPP
 

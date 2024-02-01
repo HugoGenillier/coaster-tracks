@@ -2,6 +2,7 @@
 #include "Attraction.h"
 #include "Visiteur.h"
 #include <iostream>
+#include "Structure.hpp"
 using namespace std;
 
 // Constructeur

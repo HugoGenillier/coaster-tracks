@@ -1,5 +1,6 @@
 #include "Visiteur.h"
 #include <iostream>
+#include "Structure.hpp"
 using namespace std;
 
 // Constructeur

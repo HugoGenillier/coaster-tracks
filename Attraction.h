@@ -5,6 +5,7 @@
 #include "Visiteur.h"
 #include <queue>
 #include <string>
+#include "Structure.hpp"
 
 class Attraction {
 public:
@@ -20,6 +21,7 @@ public:
 private:
 	// Membres privés
 	std::string Nom;
+	Coordonnees position;
 	int TempsAttenteActuel;
 	int Capacite;
 	std::queue<Visiteur> FileAttente;

@@ -2,6 +2,7 @@
 #include "Attraction.h"
 #include <string>
 #include <queue>
+#include "Structure.hpp"
 using namespace std;
 
 int main() {
