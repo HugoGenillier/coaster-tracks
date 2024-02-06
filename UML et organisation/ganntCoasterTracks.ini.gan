@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2023-09-01" view-index="0" gantt-divider-location="351" resource-divider-location="300" version="3.2.3247" locale="fr_FR">
+    <description/>
+    <view zooming-state="default:9" id="gantt-chart">
+        <field id="tpd3" name="Nom" width="200" order="0"/>
+        <field id="tpd4" name="Date de début" width="75" order="1"/>
+        <field id="tpd5" name="Date de fin" width="75" order="2"/>
+        <option id="taskLabelRight" value="name"/>
+        <option id="filter.completedTasks" value="false"/>
+        <option id="color.recent">
+            <![CDATA[#ffcc66 #ff9966]]>
+        </option>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="Nom" width="210" order="0"/>
+        <field id="1" name="Rôle par défaut" width="86" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <default-week id="1" name="default" sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="1"/>
+            <only-show-weekends value="false"/>
+            <overriden-day-types/>
+            <days/>
+        </day-types>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="1" name="Début du projet" color="#8cb6ce" meeting="true" start="2023-12-05" duration="0" complete="0" thirdDate="2024-02-06" thirdDate-constraint="0" expand="true"/>
+        <task id="9" name="Installation technique du projet et adaptation au C++" color="#8cb6ce" meeting="false" start="2024-01-12" duration="15" complete="0" thirdDate="2023-11-01" thirdDate-constraint="0" expand="true"/>
+        <task id="10" name="Recherches théorique système multi-agents et modélisation" color="#8cb6ce" meeting="false" start="2024-01-12" duration="18" complete="0" thirdDate="2023-11-01" thirdDate-constraint="0" expand="true"/>
+        <task id="11" name="Squelette du code de base et initialisation de git" color="#ff9966" meeting="false" start="2024-01-12" duration="16" complete="0" thirdDate="2023-11-01" thirdDate-constraint="0" expand="true"/>
+        <task id="12" name="Code de système &quot;Parc&quot; et du passage du temps" color="#ff9966" meeting="false" start="2024-02-02" duration="10" complete="0" thirdDate="2023-11-01" thirdDate-constraint="0" expand="true"/>
+        <task id="13" name="Code V1 visiteurs et attractions" color="#ff9966" meeting="false" start="2024-02-13" duration="15" complete="0" thirdDate="2023-11-01" thirdDate-constraint="0" expand="true"/>
+        <task id="0" name="rendu CDC V1" color="#8cb6ce" meeting="true" start="2024-01-12" duration="0" complete="0" thirdDate="2024-02-06" thirdDate-constraint="0" expand="true"/>
+        <task id="2" name="Rdv tuteur 1" color="#8cb6ce" meeting="true" start="2024-02-01" duration="0" complete="0" thirdDate="2024-01-08" thirdDate-constraint="0" expand="true"/>
+        <task id="21" name="Recherche sujet et CDC v1" color="#8cb6ce" meeting="false" start="2023-12-05" duration="29" complete="0" thirdDate="2023-11-01" thirdDate-constraint="0" expand="true"/>
+        <task id="3" name="Rdv tuteur 2" color="#8cb6ce" meeting="true" start="2024-02-13" duration="0" complete="0" thirdDate="2024-01-08" thirdDate-constraint="0" expand="true"/>
+        <task id="4" name="Rdv tuteur 3" color="#8cb6ce" meeting="true" start="2024-03-05" duration="0" complete="0" thirdDate="2024-01-08" thirdDate-constraint="0" expand="true"/>
+        <task id="7" name="Point avant soutenance" color="#8cb6ce" meeting="true" start="2024-03-12" duration="0" complete="0" thirdDate="2023-11-01" thirdDate-constraint="0" expand="true"/>
+        <task id="8" name="rdv tuteur 4" color="#8cb6ce" meeting="true" start="2024-03-26" duration="0" complete="0" thirdDate="2023-11-01" thirdDate-constraint="0" expand="true"/>
+        <task id="6" name="Soutenance" color="#8cb6ce" meeting="true" start="2024-03-29" duration="0" complete="0" thirdDate="2023-11-01" thirdDate-constraint="0" priority="2" expand="true"/>
+        <task id="14" name="Mise à jour CDC et planning" color="#8cb6ce" meeting="false" start="2024-02-01" duration="9" complete="0" thirdDate="2023-11-01" thirdDate-constraint="0" expand="true"/>
+        <task id="15" name="Automatisation des agents (décision, adaptation...)" color="#ff9966" meeting="false" start="2024-02-26" duration="14" complete="0" thirdDate="2023-11-01" thirdDate-constraint="0" expand="true"/>
+        <task id="5" name="Rendu final" color="#8cb6ce" meeting="true" start="2024-04-05" duration="0" complete="0" thirdDate="2024-01-08" thirdDate-constraint="0" priority="4" expand="true"/>
+        <task id="16" name="Génération pseudo-aléatoire des visiteurs" color="#ff9966" meeting="false" start="2024-03-05" duration="13" complete="0" thirdDate="2023-11-01" thirdDate-constraint="0" expand="true"/>
+        <task id="17" name="Système visualisation des temps d'attente (SFML)" color="#ff9966" meeting="false" start="2024-03-11" duration="14" complete="0" thirdDate="2023-11-01" thirdDate-constraint="0" expand="true"/>
+        <task id="18" name="Préparation de la soutenance" color="#8cb6ce" meeting="false" start="2024-03-12" duration="13" complete="0" thirdDate="2023-11-01" thirdDate-constraint="0" expand="true"/>
+        <task id="19" name="Finalisation du livrable" color="#8cb6ce" meeting="false" start="2024-03-29" duration="6" complete="0" thirdDate="2023-11-01" thirdDate-constraint="0" expand="true"/>
+        <task id="20" name="Tests" color="#ffcc66" meeting="false" start="2024-03-13" duration="13" complete="0" thirdDate="2023-11-01" thirdDate-constraint="0" expand="true"/>
+    </tasks>
+    <resources/>
+    <allocations/>
+    <vacations/>
+    <previous/>
+    <roles roleset-name="Default"/>
+    <roles roleset-name="SoftwareDevelopment"/>
+</project>
