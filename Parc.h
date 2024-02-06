@@ -4,6 +4,7 @@
 #include "Attraction.h"
 #include <queue>
 #include <string>
+#include <chrono>
 #include "Structure.hpp"
 
 class Parc {
@@ -22,6 +23,8 @@ private:
 	std::string Nom;
 	std::vector<Visiteur> Visiteurs;
 	std::vector<Attraction> Attractions;
+	std::chrono::system_clock::time_point heureOuverture;
+	std::chrono::system_clock::time_point heureFermeture;
 };
 
 #endif // PARC_HPP

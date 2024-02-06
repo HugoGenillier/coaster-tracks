@@ -140,12 +140,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Attraction.cpp" />
+    <ClCompile Include="Horloge.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Parc.cpp" />
     <ClCompile Include="Visiteur.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Attraction.h" />
+    <ClInclude Include="Horloge.h" />
     <ClInclude Include="Parc.h" />
     <ClInclude Include="Structure.hpp" />
     <ClInclude Include="Visiteur.h" />
