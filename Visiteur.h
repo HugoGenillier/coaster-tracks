@@ -2,8 +2,12 @@
 
 #ifndef VISITEUR_HPP
 #define VISITEUR_HPP
+
 #include <string>
 #include "Structure.hpp"
+#include <iostream>
+#include "Horloge.h"
+using namespace std;
 
 class Visiteur {
 public:

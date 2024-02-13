@@ -148,6 +148,7 @@
   <ItemGroup>
     <ClInclude Include="Attraction.h" />
     <ClInclude Include="Horloge.h" />
+    <ClInclude Include="main.h" />
     <ClInclude Include="Parc.h" />
     <ClInclude Include="Structure.hpp" />
     <ClInclude Include="Visiteur.h" />

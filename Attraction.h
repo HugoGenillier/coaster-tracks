@@ -2,10 +2,14 @@
 
 #ifndef ATTRACTION_HPP
 #define ATTRACTION_HPP
+
 #include "Visiteur.h"
 #include <queue>
 #include <string>
 #include "Structure.hpp"
+#include <iostream>
+#include "Horloge.h"
+using namespace std;
 
 class Attraction {
 public:

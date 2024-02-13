@@ -1,45 +1,42 @@
-#include "Visiteur.h"
-#include "Attraction.h"
-#include <string>
-#include <queue>
-#include "Structure.hpp"
-#include "Horloge.h"
-#include <thread>
-using namespace std;
+#include "main.h"
+#include "Parc.h"
 
-#include <iostream>
-#include "Horloge.h" // Inclure le fichier d'en-tête de la classe Horloge
-
-
-void avancerTemps(Horloge& horloge) {
-	// Durée entre chaque avancement du temps (10 secondes dans cet exemple)
-	std::chrono::seconds dureeAvancement(10);
-
+// Fonction pour afficher l'heure à intervalle régulier
+void afficherHeure(Horloge& horloge) {
 	while (true) {
-		// Avancer le temps de 1 heure
-		horloge.avancerTemps(1);
+		// Avancer d'une heure dans l'horloge
+		horloge.avancerTemps(); // Avance d'une heure
 
-		// Afficher l'heure actuelle
-		std::cout << "Heure actuelle : " << horloge.getHeureActuelle() << "h" << std::endl;
+		// Récupérer l'heure et les minutes
+		int heure = horloge.getHeure();
+		int minute = horloge.getMinute();
 
-		// Attendre la durée d'avancement
-		std::this_thread::sleep_for(dureeAvancement);
+		// Afficher l'heure
+		std::cout << "Heure : " << heure << "h" << minute << std::endl;
 
-		// Sortir de la boucle si l'heure actuelle est 23h
-		if (horloge.getHeureActuelle() == 23) {
-			break;
-		}
+		// Attendre une minute réelle
+		std::this_thread::sleep_for(std::chrono::seconds(1));
 	}
 }
 
 int main() {
-	Horloge horloge;
+	// Créer une instance de l'horloge
+	Horloge horloge(9, 12);
 
-	// Créer un thread pour faire avancer le temps
-	std::thread threadAvancement(avancerTemps, std::ref(horloge));
+	// Démarrer la simulation du temps (avec un défilement plus lent)
+	horloge.start();
 
-	// Attendre que le thread de l'avancement du temps se termine
-	threadAvancement.join();
+	// Lancer un thread pour afficher l'heure
+	std::thread affichageThread(afficherHeure, std::ref(horloge));
+
+	// Attendre que l'utilisateur appuie sur une touche pour terminer le programme
+	std::cin.get();
+
+	// Arrêter la simulation du temps
+	horloge.stop();
+
+	// Attendre que le thread d'affichage se termine
+	affichageThread.join();
 
 	return 0;
 }

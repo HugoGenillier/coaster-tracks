@@ -1,33 +1,44 @@
 #include "Horloge.h"
-#include <iostream>
-#include <thread>
+#pragma once
 #include <chrono>
 
-Horloge::Horloge() {
-	// Récupérer la date et l'heure actuelle du système
-	std::time_t maintenant = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-
-	// Convertir la date et l'heure actuelle en une structure tm (pour accéder aux informations sur l'heure)
-	std::tm ltm;
-	localtime_s(&ltm, &maintenant); // Utilisation de localtime_s au lieu de localtime
-
-	// Initialiser l'heure de l'horloge à 00h00
-	ltm.tm_hour = 0;
-	ltm.tm_min = 0;
-	ltm.tm_sec = 0;
-
-	// Convertir la structure tm en time_t
-	std::time_t debutDuJour = std::mktime(&ltm);
-
-	// Convertir le time_t en un objet time_point
-	heureActuelle = std::chrono::system_clock::from_time_t(debutDuJour);
+Horloge::Horloge(int heureDebut, int heureFin) : heureDebut(heureDebut), heureFin(heureFin), running(false) {
+	// Initialiser l'horloge à l'heure de début
+	tempsActuel = std::chrono::system_clock::time_point{}; // Début de l'epoch
+	tempsActuel += std::chrono::hours(heureDebut);
 }
 
-void Horloge::avancerTemps(int heures) {
-	heureActuelle += std::chrono::hours(heures);
+void Horloge::start() {
+	running = true;
+	std::thread([this]() {
+		while (running) {
+			std::this_thread::sleep_for(std::chrono::seconds(1)); // Faire dormir le thread pendant une minute
+			avancerTemps(); // Avancer d'une minute
+		}
+		}).detach(); // Détacher le thread pour qu'il s'exécute en arrière-plan
 }
 
-int Horloge::getHeureActuelle() const {
-	auto duree = heureActuelle.time_since_epoch();
-	return std::chrono::duration_cast<std::chrono::hours>(duree).count() % 24;
+void Horloge::stop() {
+	running = false;
+}
+
+void Horloge::avancerTemps() {
+	// Avancer d'une minute
+	tempsActuel += std::chrono::minutes(1);
+}
+
+int Horloge::getHeure() const {
+	// Extraire l'heure actuelle à partir du temps actuel en utilisant localtime_s
+	time_t time = std::chrono::system_clock::to_time_t(tempsActuel);
+	struct tm timeinfo;
+	localtime_s(&timeinfo, &time);
+	return timeinfo.tm_hour;
+}
+
+int Horloge::getMinute() const {
+	// Extraire les minutes actuelles à partir du temps actuel en utilisant localtime_s
+	time_t time = std::chrono::system_clock::to_time_t(tempsActuel);
+	struct tm timeinfo;
+	localtime_s(&timeinfo, &time);
+	return timeinfo.tm_min;
 }

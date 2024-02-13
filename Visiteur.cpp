@@ -1,7 +1,4 @@
 #include "Visiteur.h"
-#include <iostream>
-#include "Structure.hpp"
-using namespace std;
 
 // Constructeur
 Visiteur::Visiteur(std::string nom) : Nom(nom), TempsAttendu(0) {}
