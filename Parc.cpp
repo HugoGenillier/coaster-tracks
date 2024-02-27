@@ -1,34 +1,40 @@
 #include "Parc.h"
+#include <iomanip> // Inclure la bibliothèque iomanip pour utiliser setw
 
 // Constructeur
-Parc::Parc(std::string nom, int ouverture, int fermeture) : Nom(nom), horloge(ouverture, fermeture) {
-	vector<Visiteur> visiteurs;
-	Visiteurs = visiteurs;
-	vector<Attraction> attractions;
-	Attractions = attractions;
-}
+Parc::Parc(std::string nom) : Nom(nom), Attractions(), Visiteurs() {}
+
 
 // Méthode publique
 void Parc::AfficherDetails() const {
 	cout << "Nom : " << Nom << endl;
 }
 
-void Parc::simulerUneJournee() {
-	// Boucle pour simuler une journée complète
-	while (horloge.getHeure() != 23 || horloge.getMinute() != 59) {
-		// Avancer d'une minute
-		horloge.avancerTemps();
+void Parc::simulerJournee(int heureOuverture, int heureFermeture) {
+	std::cout << "Simulation de la journée dans le parc de " << heureOuverture << "h à " << heureFermeture << "h\n";
 
-		// Afficher l'heure actuelle
-		afficherHeure();
+	// Création de l'horloge au moment du démarrage de la simulation de la journée
+	Horloge horloge(heureOuverture, heureFermeture);
+	horloge.start();
 
-		// Effectuer d'autres opérations de simulation pour chaque minute
+	while (horloge.estEnCours()) {
+		std::lock_guard<std::mutex> lock(mutexHorloge); // Verrouiller l'accès à l'horloge
+
+		int heure = horloge.getHeure();
+		int minute = horloge.getMinute();
+		std::system("cls");
+		std::cout << "Heure : " << std::setw(2) << std::setfill('0') << heure << "h"
+			<< std::setw(2) << std::setfill('0') << minute << "\n";
+
+		// Attendre une minute (simulation de l'heure)
+		std::this_thread::sleep_for(std::chrono::seconds(1)); // Attendre 1 seconde pour simuler une minute
 	}
+
+	std::cout << "Fin de la journée dans le parc\n";
 }
 
-void Parc::afficherHeure() {
-	std::cout << "Heure actuelle : " << horloge.getHeure() << "h" << horloge.getMinute() << std::endl;
-}
+
+
 
 // Destructeur
 Parc::~Parc() {}
