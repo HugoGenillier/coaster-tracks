@@ -11,6 +11,11 @@ void Parc::AfficherDetails() const {
 	cout << "Nom : " << Nom << endl;
 }
 
+void Parc::AjouterAttraction(const Attraction& attraction) {
+	Attractions.push_back(attraction); // Ajoute l'attraction à la liste des attractions du parc
+}
+
+
 void Parc::simulerJournee(int heureOuverture, int heureFermeture) {
 	std::cout << "Simulation de la journée dans le parc de " << heureOuverture << "h à " << heureFermeture << "h\n";
 
@@ -27,12 +32,17 @@ void Parc::simulerJournee(int heureOuverture, int heureFermeture) {
 		std::cout << "Heure : " << std::setw(2) << std::setfill('0') << heure << "h"
 			<< std::setw(2) << std::setfill('0') << minute << "\n";
 
-		// Afficher les détails de chaque attraction
-		for (const auto& attraction : Attractions) {
+		// Faire avancer le temps dans chaque attraction
+		for (auto& attraction : Attractions) {
+			attraction.AvancerTour(); // Faire avancer la file d'attente et le temps d'attente estimé de l'attraction
 			std::cout << "Attraction : " << attraction.GetNom() << ", Temps d'attente estimé : " << attraction.TempsAttenteEstime() << " minutes\n";
+			std::cout << "Nombre de visiteurs dans la file d'attente : " << attraction.GetNombreVisiteur() << std::endl;
 		}
 
-		// Attendre une minute (simulation de l'heure)
+		// Faire avancer l'horloge d'une minute
+		horloge.avancerTemps();
+
+		// Attendre une seconde (simulation de l'heure)
 		std::this_thread::sleep_for(std::chrono::seconds(1)); // Attendre 1 seconde pour simuler une minute
 	}
 

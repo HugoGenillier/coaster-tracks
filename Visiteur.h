@@ -17,6 +17,8 @@ public:
 	// Méthode publique
 	void AfficherDetails() const;
 
+	std::string GetNom() const;
+
 	// Destructeur
 	~Visiteur();
 

@@ -25,6 +25,8 @@ public:
 	int GetTempsFonctionnementRestant() const;
 	int TempsAttenteEstime() const;
 	string GetNom() const;
+	void AvancerTour();
+	int GetNombreVisiteur() const;
 
 	// Destructeur
 	~Attraction();

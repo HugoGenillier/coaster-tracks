@@ -38,6 +38,10 @@ int Attraction::GetTempsFonctionnementRestant() const {
 	return TempsFonctionnementRestant;
 }
 
+int Attraction::GetNombreVisiteur() const {
+	return FileAttente.size();
+}
+
 int Attraction::TempsAttenteEstime() const {
 	// Calculer le nombre de visiteurs dans la file d'attente
 	int nombreVisiteurs = FileAttente.size();
@@ -52,6 +56,28 @@ int Attraction::TempsAttenteEstime() const {
 	return tempsAttente;
 }
 
+void Attraction::AvancerTour() {
+	// Si l'attraction est toujours en fonctionnement
+	if (!FileAttente.empty()) {
+		// Calculer le nombre de visiteurs à faire embarquer pour ce tour
+		size_t visiteursAEmbarquer = std::min(FileAttente.size(), static_cast<size_t>(Capacite));
+
+
+		// Faire embarquer les visiteurs par groupes
+		for (int i = 0; i < visiteursAEmbarquer; ++i) {
+			// Retirer le visiteur en tête de file
+			Visiteur visiteur = FileAttente.front();
+			FileAttente.pop();
+
+			// Faire passer le visiteur à travers l'attraction (simulation)
+			// Ici vous pouvez placer la logique de traitement du visiteur dans l'attraction
+			// par exemple, mettre à jour les statistiques du visiteur, etc.
+		}
+
+		// Mettre à jour le temps restant de l'attraction après chaque tour effectué
+		ReduireTempsFonctionnementRestant();
+	}
+}
 std::string Attraction::GetNom() const {
 	return Nom; // Retourne le nom de l'attraction
 }

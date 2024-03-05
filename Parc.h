@@ -23,6 +23,8 @@ public:
 
 	void simulerJournee(int heureOuverture, int heureFermeture);
 
+	void AjouterAttraction(const Attraction& attraction);
+
 	// Destructeur
 	~Parc();
 

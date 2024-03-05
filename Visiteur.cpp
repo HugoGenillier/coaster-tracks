@@ -8,6 +8,10 @@ void Visiteur::AfficherDetails() const {
 	cout << "Nom : " << Nom << ", Temps total d'attente : " << TempsAttendu << endl;
 }
 
+std::string Visiteur::GetNom() const {
+	return Nom;
+}
+
 // Destructeur
 Visiteur::~Visiteur() {}
 
