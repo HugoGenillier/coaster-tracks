@@ -14,10 +14,16 @@ using namespace std;
 class Attraction {
 public:
 	// Constructeur
-	Attraction(std::string nom, int capacite);
+	Attraction(const std::string& nom, int capacite, int tempsFonctionnement);
 
 	// Méthode publique
 	void AfficherDetails() const;
+
+	void ReduireTempsFonctionnementRestant();
+	void RetirerVisiteursTermines();
+	void AjouterVisiteur(const Visiteur& visiteur);
+	int GetTempsFonctionnementRestant() const;
+	int TempsAttenteEstime() const;
 
 	// Destructeur
 	~Attraction();
@@ -25,9 +31,10 @@ public:
 private:
 	// Membres privés
 	std::string Nom;
-	Coordonnees position;
-	int TempsAttenteActuel;
+	Coordonnees Position;
 	int Capacite;
+	int TempsTour;
+	int TempsFonctionnementRestant;
 	std::queue<Visiteur> FileAttente;
 };
 

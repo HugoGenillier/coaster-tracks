@@ -26,6 +26,22 @@ void Parc::simulerJournee(int heureOuverture, int heureFermeture) {
 		std::cout << "Heure : " << std::setw(2) << std::setfill('0') << heure << "h"
 			<< std::setw(2) << std::setfill('0') << minute << "\n";
 
+		// Mettre à jour le temps de fonctionnement restant de chaque attraction
+		for (auto& attraction : Attractions) {
+			if (attraction.getTempsFonctionnementRestant() > 0) {
+				attraction.reduireTempsFonctionnementRestant();
+			}
+
+			// Si le temps de fonctionnement restant atteint zéro, traiter les visiteurs
+			if (attraction.getTempsFonctionnementRestant() == 0) {
+				// Retirer les visiteurs qui ont terminé leur tour
+				attraction.retirerVisiteursTermines();
+
+				// Ajouter de nouveaux visiteurs à partir de la file d'attente
+				attraction.ajouterVisiteurs(fileAttente);
+			}
+		}
+
 		// Attendre une minute (simulation de l'heure)
 		std::this_thread::sleep_for(std::chrono::seconds(1)); // Attendre 1 seconde pour simuler une minute
 	}
