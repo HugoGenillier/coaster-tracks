@@ -52,5 +52,9 @@ int Attraction::TempsAttenteEstime() const {
 	return tempsAttente;
 }
 
+std::string Attraction::GetNom() const {
+	return Nom; // Retourne le nom de l'attraction
+}
+
 // Destructeur
 Attraction::~Attraction() {}

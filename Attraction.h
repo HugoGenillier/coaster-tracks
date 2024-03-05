@@ -24,6 +24,7 @@ public:
 	void AjouterVisiteur(const Visiteur& visiteur);
 	int GetTempsFonctionnementRestant() const;
 	int TempsAttenteEstime() const;
+	string GetNom() const;
 
 	// Destructeur
 	~Attraction();

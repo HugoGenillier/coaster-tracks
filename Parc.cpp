@@ -1,4 +1,5 @@
 #include "Parc.h"
+#include "Attraction.h"
 #include <iomanip> // Inclure la bibliothèque iomanip pour utiliser setw
 
 // Constructeur
@@ -26,20 +27,9 @@ void Parc::simulerJournee(int heureOuverture, int heureFermeture) {
 		std::cout << "Heure : " << std::setw(2) << std::setfill('0') << heure << "h"
 			<< std::setw(2) << std::setfill('0') << minute << "\n";
 
-		// Mettre à jour le temps de fonctionnement restant de chaque attraction
-		for (auto& attraction : Attractions) {
-			if (attraction.getTempsFonctionnementRestant() > 0) {
-				attraction.reduireTempsFonctionnementRestant();
-			}
-
-			// Si le temps de fonctionnement restant atteint zéro, traiter les visiteurs
-			if (attraction.getTempsFonctionnementRestant() == 0) {
-				// Retirer les visiteurs qui ont terminé leur tour
-				attraction.retirerVisiteursTermines();
-
-				// Ajouter de nouveaux visiteurs à partir de la file d'attente
-				attraction.ajouterVisiteurs(fileAttente);
-			}
+		// Afficher les détails de chaque attraction
+		for (const auto& attraction : Attractions) {
+			std::cout << "Attraction : " << attraction.GetNom() << ", Temps d'attente estimé : " << attraction.TempsAttenteEstime() << " minutes\n";
 		}
 
 		// Attendre une minute (simulation de l'heure)
@@ -48,7 +38,6 @@ void Parc::simulerJournee(int heureOuverture, int heureFermeture) {
 
 	std::cout << "Fin de la journée dans le parc\n";
 }
-
 
 
 

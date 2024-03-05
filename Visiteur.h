@@ -23,7 +23,7 @@ public:
 private:
 	// Membres privés
 	std::string Nom;
-	Coordonnees position;
+	Coordonnees Position;
 	int TempsAttendu;
 };
 
