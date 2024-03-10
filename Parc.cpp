@@ -39,9 +39,6 @@ void Parc::simulerJournee(int heureOuverture, int heureFermeture) {
 			std::cout << "Nombre de visiteurs dans la file d'attente : " << attraction.GetNombreVisiteur() << std::endl;
 		}
 
-		// Faire avancer l'horloge d'une minute
-		horloge.avancerTemps();
-
 		// Attendre une seconde (simulation de l'heure)
 		std::this_thread::sleep_for(std::chrono::seconds(1)); // Attendre 1 seconde pour simuler une minute
 	}

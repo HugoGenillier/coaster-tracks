@@ -42,4 +42,3 @@ private:
 };
 
 #endif // ATTRACTION_HPP
-
