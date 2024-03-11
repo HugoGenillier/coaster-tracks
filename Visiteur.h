@@ -17,6 +17,12 @@ public:
 	// Méthode publique
 	void AfficherDetails() const;
 
+	void ActiverVisiteur() const;
+
+	void DeplacerVersObjectif() const;
+
+	void FaireDecision() const;
+
 	std::string GetNom() const;
 
 	// Destructeur
@@ -27,6 +33,7 @@ private:
 	std::string Nom;
 	Coordonnees Position;
 	int TempsAttendu;
+	Attraction ObjectifActuel;
 };
 
 #endif // PERSONNE_HPP

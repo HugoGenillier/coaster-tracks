@@ -1,2 +1,8 @@
-﻿  Parc.cpp
+﻿  Attraction.cpp
+C:\Users\genil\Desktop\P2I\CoasterTracks\Attraction.cpp(42,25): warning C4267: 'return' : conversion de 'size_t' en 'int', perte possible de données
+C:\Users\genil\Desktop\P2I\CoasterTracks\Attraction.cpp(47,22): warning C4267: 'initialisation' : conversion de 'size_t' en 'int', perte possible de données
+  main.cpp
+  Parc.cpp
+  Visiteur.cpp
+  Génération de code en cours...
   CoasterTracks.vcxproj -> C:\Users\genil\Desktop\P2I\CoasterTracks\x64\Debug\CoasterTracks.exe

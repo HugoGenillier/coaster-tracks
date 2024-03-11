@@ -51,11 +51,14 @@ int Attraction::TempsAttenteEstime() const {
 		return 0;
 	}
 
+	// Calculer le temps restant avant le prochain tour
+	int tempsRestantAvantTour = GetTempsFonctionnementRestant();
+
 	// Calculer le nombre de tours nécessaires pour faire passer tous les visiteurs
 	int nombreTours = (nombreVisiteurs + Capacite - 1) / Capacite; // Division entière arrondie par excès
 
 	// Calculer le temps d'attente estimé en fonction du nombre de tours et du temps nécessaire pour un tour
-	int tempsAttente = nombreTours * TempsTour;
+	int tempsAttente = tempsRestantAvantTour + (nombreTours - 1) * TempsTour;
 
 	return tempsAttente;
 }
