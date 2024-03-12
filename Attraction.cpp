@@ -5,6 +5,7 @@
 Attraction::Attraction(const std::string& nom, int capacite, int tempsFonctionnement)
 	: Nom(nom), Capacite(capacite), TempsFonctionnementRestant(tempsFonctionnement), TempsTour(tempsFonctionnement) {}
 
+Attraction::Attraction() {}
 
 // Méthode publique
 void Attraction::AfficherDetails() const {
@@ -41,6 +42,8 @@ int Attraction::GetTempsFonctionnementRestant() const {
 int Attraction::GetNombreVisiteur() const {
 	return FileAttente.size();
 }
+
+const Coordonnees& Attraction::GetPosition() const { return Position; }
 
 int Attraction::TempsAttenteEstime() const {
 	// Calculer le nombre de visiteurs dans la file d'attente

@@ -7,6 +7,7 @@
 #include "Structure.hpp"
 #include <iostream>
 #include "Horloge.h"
+#include "Attraction.h"
 using namespace std;
 
 class Visiteur {
@@ -17,11 +18,11 @@ public:
 	// Méthode publique
 	void AfficherDetails() const;
 
-	void ActiverVisiteur() const;
+	void ActiverVisiteur();
 
-	void DeplacerVersObjectif() const;
+	void DeplacerVersAttraction();
 
-	void FaireDecision() const;
+	void FaireDecision();
 
 	std::string GetNom() const;
 
@@ -33,7 +34,8 @@ private:
 	std::string Nom;
 	Coordonnees Position;
 	int TempsAttendu;
-	Attraction ObjectifActuel;
+	Attraction Objectif;
+	EtatVisiteur Etat;
 };
 
 #endif // PERSONNE_HPP

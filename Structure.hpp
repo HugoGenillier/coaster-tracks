@@ -16,9 +16,18 @@ struct Coordonnees {
 		// Arrondir à l'entier le plus proche
 		return static_cast<int>(round(distance));
 	}
+
+	// Surcharge de l'opérateur ==
+	bool operator==(const Coordonnees& autre) const {
+		return x == autre.x && y == autre.y;
+	}
 };
 
-
-// Ajoutez d'autres structures au besoin...
+// Définition de l'énumération pour les états du visiteur
+enum class EtatVisiteur {
+	EnMarche,
+	EnFileAttente,
+	EnDecision
+};
 
 #endif // STRUCTURES_HPP

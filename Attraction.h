@@ -13,7 +13,8 @@ using namespace std;
 
 class Attraction {
 public:
-	// Constructeur
+	// Constructeurs
+	Attraction();
 	Attraction(const std::string& nom, int capacite, int tempsFonctionnement);
 
 	// Méthode publique
@@ -25,6 +26,7 @@ public:
 	int GetTempsFonctionnementRestant() const;
 	int TempsAttenteEstime() const;
 	string GetNom() const;
+	const Coordonnees& GetPosition() const;
 	void AvancerTour();
 	int GetNombreVisiteur() const;
 
