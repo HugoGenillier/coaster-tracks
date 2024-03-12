@@ -1,15 +1,14 @@
-// Attraction.hpp
+#ifndef ATTRACTION_H
+#define ATTRACTION_H
 
-#ifndef ATTRACTION_HPP
-#define ATTRACTION_HPP
-
-#include "Visiteur.h"
 #include <queue>
 #include <string>
 #include "Structure.hpp"
 #include <iostream>
 #include "Horloge.h"
-using namespace std;
+
+// Déclaration avancée de la classe Visiteur
+class Visiteur;
 
 class Attraction {
 public:
@@ -17,18 +16,19 @@ public:
 	Attraction();
 	Attraction(const std::string& nom, int capacite, int tempsFonctionnement);
 
-	// Méthode publique
+	// Méthodes publiques
 	void AfficherDetails() const;
-
 	void ReduireTempsFonctionnementRestant();
 	void RetirerVisiteursTermines();
-	void AjouterVisiteur(const Visiteur& visiteur);
+	void AjouterVisiteur(Visiteur* visiteur); // Utilisation de pointeurs
 	int GetTempsFonctionnementRestant() const;
 	int TempsAttenteEstime() const;
-	string GetNom() const;
+	std::string GetNom() const;
 	const Coordonnees& GetPosition() const;
 	void AvancerTour();
 	int GetNombreVisiteur() const;
+
+	std::queue<Visiteur*>& GetFileAttente();
 
 	// Destructeur
 	~Attraction();
@@ -40,7 +40,7 @@ private:
 	int Capacite;
 	int TempsTour;
 	int TempsFonctionnementRestant;
-	std::queue<Visiteur> FileAttente;
+	std::queue<Visiteur*> FileAttente; // Utilisation de pointeurs
 };
 
-#endif // ATTRACTION_HPP
+#endif // ATTRACTION_H

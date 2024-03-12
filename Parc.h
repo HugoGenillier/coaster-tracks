@@ -25,6 +25,10 @@ public:
 
 	void AjouterAttraction(const Attraction& attraction);
 
+	std::vector<Attraction>& GetAttractions() {
+		return Attractions;
+	}
+
 	// Destructeur
 	~Parc();
 

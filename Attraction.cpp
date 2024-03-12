@@ -1,5 +1,5 @@
 #include "Attraction.h"
-
+#include "Visiteur.h"
 
 // Constructeur de la classe Attraction
 Attraction::Attraction(const std::string& nom, int capacite, int tempsFonctionnement)
@@ -10,7 +10,7 @@ Attraction::Attraction() {}
 // Méthode publique
 void Attraction::AfficherDetails() const {
 	int TempsAttenteActuel = TempsAttenteEstime();
-	cout << "Nom : " << Nom << ", Capacite : " << Capacite << ", Temps d'attente actuel : " << TempsAttenteActuel << endl;
+	std::cout << "Nom : " << Nom << ", Capacite : " << Capacite << ", Temps d'attente actuel : " << TempsAttenteActuel << std::endl;
 }
 
 void Attraction::ReduireTempsFonctionnementRestant() {
@@ -30,7 +30,7 @@ void Attraction::RetirerVisiteursTermines() {
 	}
 }
 
-void Attraction::AjouterVisiteur(const Visiteur& visiteur) {
+void Attraction::AjouterVisiteur(Visiteur* visiteur) {
 	// Ajouter le visiteur à la file d'attente
 	FileAttente.push(visiteur);
 }
@@ -74,20 +74,31 @@ void Attraction::AvancerTour() {
 
 		// Si le temps restant avant le prochain tour est écoulé
 		if (TempsFonctionnementRestant == 0) {
+			// Créer une copie de la file d'attente pour pouvoir la modifier
+			std::queue<Visiteur*> fileAttenteNonConst = FileAttente;
+
 			// Faire embarquer un groupe de visiteurs depuis la file d'attente
-			int visiteursAEmbarquer = std::min(static_cast<int>(FileAttente.size()), Capacite);
+			int visiteursAEmbarquer = std::min(static_cast<int>(fileAttenteNonConst.size()), Capacite);
 			for (int i = 0; i < visiteursAEmbarquer; ++i) {
-				// Retirer le visiteur en tête de file et simuler son passage dans l'attraction
-				FileAttente.pop();
+				// Retirer le visiteur en tête de file
+				fileAttenteNonConst.pop();
 			}
+
+			// Remplacer la file d'attente actuelle par la nouvelle file d'attente modifiée
+			FileAttente = fileAttenteNonConst;
 
 			// Réinitialiser le temps restant avant le prochain tour avec le temps de tour de l'attraction
 			TempsFonctionnementRestant = TempsTour;
 		}
 	}
 }
+
 std::string Attraction::GetNom() const {
 	return Nom; // Retourne le nom de l'attraction
+}
+
+std::queue<Visiteur*>& Attraction::GetFileAttente() {
+	return FileAttente;
 }
 
 // Destructeur

@@ -1,5 +1,4 @@
 #include "Parc.h"
-#include "Attraction.h"
 #include <iomanip> // Inclure la bibliothèque iomanip pour utiliser setw
 
 // Constructeur

@@ -1,15 +1,2 @@
-﻿  Attraction.cpp
-C:\Users\genil\Desktop\P2I\CoasterTracks\Attraction.cpp(42,25): warning C4267: 'return' : conversion de 'size_t' en 'int', perte possible de données
-C:\Users\genil\Desktop\P2I\CoasterTracks\Attraction.cpp(47,22): warning C4267: 'initialisation' : conversion de 'size_t' en 'int', perte possible de données
-  Parc.cpp
-  Visiteur.cpp
-  main.cpp
-C:\Users\genil\Desktop\P2I\CoasterTracks\Visiteur.cpp(22,3): error C2662: 'void Visiteur::DeplacerVersAttraction(void)' : impossible de convertir un pointeur 'this' de 'const Visiteur' en 'Visiteur &'
-  C:\Users\genil\Desktop\P2I\CoasterTracks\Visiteur.cpp(22,3):
-  La conversion perd les qualificateurs
-  C:\Users\genil\Desktop\P2I\CoasterTracks\Visiteur.h(22,7):
-  voir la déclaration de 'Visiteur::DeplacerVersAttraction'
-  C:\Users\genil\Desktop\P2I\CoasterTracks\Visiteur.cpp(22,3):
-  lors de la tentative de mise en correspondance de la liste des arguments '()'
-  
-  Génération de code en cours...
+﻿  Visiteur.cpp
+  CoasterTracks.vcxproj -> C:\Users\genil\Desktop\P2I\CoasterTracks\x64\Debug\CoasterTracks.exe
