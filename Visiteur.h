@@ -4,7 +4,11 @@
 
 #include <string>
 #include "Structure.hpp"
+#include <utility> // pour std::pair
 #include <iostream>
+
+// Inclure l'en-tête de la classe Attraction
+#include "Attraction.h"
 
 // Déclaration avancée de la classe Attraction
 class Attraction;
@@ -12,7 +16,8 @@ class Attraction;
 class Visiteur {
 public:
 	// Constructeur
-	Visiteur(std::string nom);
+	Visiteur();
+	Visiteur(std::string nom, std::vector<Attraction>& attractions);
 
 	// Méthodes publiques
 	void AfficherDetails() const;
@@ -20,6 +25,9 @@ public:
 	void DeplacerVersAttraction();
 	void FaireDecision();
 	std::string GetNom() const;
+	const Coordonnees& GetPosition() const {
+		return Position;
+	}
 
 	// Destructeur
 	~Visiteur();
@@ -30,6 +38,7 @@ private:
 	int TempsAttendu;
 	Attraction* Objectif;
 	EtatVisiteur Etat;
+	std::vector<std::pair<Attraction*, bool>> ListeAttractions;
 };
 
 #endif // VISITEUR_H

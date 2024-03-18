@@ -2,8 +2,8 @@
 #include "Visiteur.h"
 
 // Constructeur de la classe Attraction
-Attraction::Attraction(const std::string& nom, int capacite, int tempsFonctionnement)
-	: Nom(nom), Capacite(capacite), TempsFonctionnementRestant(tempsFonctionnement), TempsTour(tempsFonctionnement) {}
+Attraction::Attraction(const std::string& nom, int capacite, int tempsFonctionnement, Coordonnees position)
+	: Nom(nom), Capacite(capacite), TempsFonctionnementRestant(tempsFonctionnement), TempsTour(tempsFonctionnement), Position(position) {}
 
 Attraction::Attraction() {}
 
