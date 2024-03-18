@@ -29,6 +29,12 @@ public:
 		return Attractions;
 	}
 
+	void AjouterVisiteur(const Visiteur& visiteur) {
+		Visiteurs.push_back(visiteur);
+	}
+
+	void LibérerVisiteurs();
+
 	// Destructeur
 	~Parc();
 

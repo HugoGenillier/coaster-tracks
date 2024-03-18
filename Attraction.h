@@ -14,7 +14,7 @@ class Attraction {
 public:
 	// Constructeurs
 	Attraction();
-	Attraction(const std::string& nom, int capacite, int tempsFonctionnement);
+	Attraction(const std::string& nom, int capacite, int tempsFonctionnement, Coordonnees positon);
 
 	// Méthodes publiques
 	void AfficherDetails() const;

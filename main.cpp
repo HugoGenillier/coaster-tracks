@@ -1,45 +1,35 @@
-#include "main.h"
 #include "Parc.h"
+#include "Attraction.h"
+#include "Visiteur.h"
 #include "Horloge.h"
-#include "Attraction.h" // Inclure le fichier d'en-tête Attraction.h
-#include "Visiteur.h" // Inclure le fichier d'en-tête Visiteur.h
 
 int main() {
 	// Création d'une instance de parc
-	Parc monParc("Parc Astérix");
+	Parc monParc("Parc d'attractions");
 
-	// Création d'une instance d'attraction avec une longue file d'attente
-	Attraction attraction("Toutatis", 20, 2);
-	for (int i = 0; i < 500; ++i) { // Ajout de 500 visiteurs dans la file d'attente
-		Visiteur* visiteur = new Visiteur("Visiteur " + std::to_string(i + 1)); // Créer un nouvel objet Visiteur sur le tas
-		attraction.AjouterVisiteur(visiteur); // Passer le pointeur à la méthode AjouterVisiteur
+	// Création d'attractions avec des files d'attente et des positions
+	Attraction toutatis("Toutatis", 20, 2, { 300, 0 });
+	Attraction discobelix("Discobelix", 50, 7, { 0, 400 });
+
+	// Ajouter des attractions au parc
+	monParc.AjouterAttraction(toutatis);
+	monParc.AjouterAttraction(discobelix);
+
+	// Création de visiteurs
+	std::vector<Visiteur> visiteurs;
+	std::vector<Attraction>& attractions = monParc.GetAttractions(); // Obtenir le vecteur d'attractions
+	for (int i = 0; i < 100; ++i) {
+		std::string nomVisiteur = "Visiteur " + std::to_string(i + 1);
+		Visiteur visiteur(nomVisiteur, attractions); // Passer le vecteur d'attractions au constructeur du visiteur
+		visiteurs.push_back(visiteur);
+		monParc.AjouterVisiteur(visiteur); // Ajouter le visiteur au vecteur de visiteurs du parc
 	}
 
-	// Ajout de l'attraction au parc
-	monParc.AjouterAttraction(attraction);
-
-	// Création d'une instance d'attraction avec une longue file d'attente
-	Attraction attraction2("Discobélix", 50, 7);
-	for (int i = 0; i < 500; ++i) { // Ajout de 500 visiteurs dans la file d'attente
-		Visiteur* visiteur = new Visiteur("Visiteur " + std::to_string(i + 1)); // Créer un nouvel objet Visiteur sur le tas
-		attraction2.AjouterVisiteur(visiteur); // Passer le pointeur à la méthode AjouterVisiteur
-	}
-
-	// Ajout de l'attraction au parc
-	monParc.AjouterAttraction(attraction2);
-
-	// Simulation de la journée dans le parc
+	// Simulation de la journée
 	monParc.simulerJournee(10, 18);
 
-	// Libérer la mémoire des visiteurs créés sur le tas
-	for (Attraction& attraction : monParc.GetAttractions()) { // Utiliser une référence non constante ici
-		std::queue<Visiteur*>& fileAttente = attraction.GetFileAttente();
-		while (!fileAttente.empty()) {
-			Visiteur* visiteur = fileAttente.front();
-			delete visiteur; // Libérer la mémoire allouée pour chaque visiteur
-			fileAttente.pop();
-		}
-	}
+	// Libération de la mémoire des visiteurs
+	monParc.LibérerVisiteurs();
 
 	return 0;
 }

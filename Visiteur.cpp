@@ -1,7 +1,19 @@
 #include "Visiteur.h" // Inclure le fichier d'en-tête de Visiteur avant tout autre fichier d'en-tête
 #include "Attraction.h"
 
-Visiteur::Visiteur(std::string nom) : Nom(nom), TempsAttendu(0), Etat(EtatVisiteur::EnDecision), Position({ 0, 0 }) {}
+
+Visiteur::Visiteur(std::string nom, std::vector<Attraction>& attractions)
+{
+	Nom = nom;
+	TempsAttendu = 0;
+	Etat = EtatVisiteur::EnDecision;
+	Position = { 0, 0 };
+	for (auto& attraction : attractions) {
+		this->ListeAttractions.push_back(std::make_pair(&attraction, false)); // Utiliser un pointeur vers l'attraction
+	}
+}
+
+Visiteur::Visiteur() {}
 
 void Visiteur::AfficherDetails() const {
 	std::cout << "Nom : " << Nom << ", Temps total d'attente : " << TempsAttendu << std::endl;
@@ -10,12 +22,15 @@ void Visiteur::AfficherDetails() const {
 void Visiteur::ActiverVisiteur() {
 	switch (Etat) {
 	case EtatVisiteur::EnDecision:
+		std::cout << "Visiteur " << Nom << " est en train de faire une décision" << std::endl;
 		FaireDecision();
 		break;
 	case EtatVisiteur::EnMarche:
+		std::cout << "Visiteur " << Nom << " est en train de se déplacer vers une attraction" << std::endl;
 		DeplacerVersAttraction();
 		break;
 	case EtatVisiteur::EnFileAttente:
+		std::cout << "Visiteur " << Nom << " est en file d'attente" << std::endl;
 		TempsAttendu += 1; // Incrémenter le temps d'attente du visiteur
 		break;
 	default:
@@ -25,6 +40,7 @@ void Visiteur::ActiverVisiteur() {
 }
 
 void Visiteur::DeplacerVersAttraction() {
+
 	// Vérifier si le visiteur est déjà à l'emplacement de l'attraction
 	if (Position == Objectif->GetPosition()) {
 		// Le visiteur est arrivé à l'attraction, changer son état en EnFileAttente
@@ -49,7 +65,48 @@ void Visiteur::DeplacerVersAttraction() {
 }
 
 void Visiteur::FaireDecision() {
-	// Implémenter la logique de prise de décision
+	// Déterminer l'attraction la plus attrayante non visitée
+	Attraction* meilleureAttraction = nullptr;
+	double meilleurScore = -1; // Initialiser à un score très bas
+
+	for (auto& attractionPair : ListeAttractions) {
+		Attraction* attraction = attractionPair.first;
+		if (!attractionPair.second) { // Vérifier si l'attraction n'a pas encore été visitée
+			// Calculer le score d'attractivité de cette attraction
+			double score = 0.0;
+
+			// Calculer la distance entre le visiteur et l'attraction
+			double distance = std::sqrt(std::pow(Position.x - attraction->GetPosition().x, 2) +
+				std::pow(Position.y - attraction->GetPosition().y, 2));
+
+			// Si la distance est nulle, cela signifie que le visiteur est déjà à l'attraction
+			if (distance == 0) {
+				score = std::numeric_limits<double>::infinity(); // Affecter une valeur infinie au score
+			}
+			else {
+				// Calculer le score basé sur la distance et le temps d'attente actuel
+				if (attraction->TempsAttenteEstime() != 0) {
+					score = 1 / distance * (1 / attraction->TempsAttenteEstime());
+				}
+				else {
+					// Si le temps d'attente estimé est nul, affecter une valeur très basse au score
+					score = std::numeric_limits<double>::lowest();
+				}
+			}
+
+			// Si le score est plus élevé que le meilleur score actuel, mettre à jour l'attraction choisie
+			if (score > meilleurScore) {
+				meilleureAttraction = attraction;
+				meilleurScore = score;
+			}
+		}
+	}
+
+	// Si une attraction a été trouvée, mettre à jour l'objectif du visiteur
+	if (meilleureAttraction != nullptr) {
+		Objectif = meilleureAttraction;
+		Etat = EtatVisiteur::EnMarche; // Changer l'état en EnMarche pour se déplacer vers la meilleure attraction
+	}
 }
 
 std::string Visiteur::GetNom() const {
