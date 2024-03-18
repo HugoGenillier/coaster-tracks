@@ -22,12 +22,15 @@ void Visiteur::AfficherDetails() const {
 void Visiteur::ActiverVisiteur() {
 	switch (Etat) {
 	case EtatVisiteur::EnDecision:
+		std::cout << "Visiteur " << Nom << " est en train de faire une décision" << std::endl;
 		FaireDecision();
 		break;
 	case EtatVisiteur::EnMarche:
+		std::cout << "Visiteur " << Nom << " est en train de se déplacer vers une attraction" << std::endl;
 		DeplacerVersAttraction();
 		break;
 	case EtatVisiteur::EnFileAttente:
+		std::cout << "Visiteur " << Nom << " est en file d'attente" << std::endl;
 		TempsAttendu += 1; // Incrémenter le temps d'attente du visiteur
 		break;
 	default:
@@ -77,13 +80,18 @@ void Visiteur::FaireDecision() {
 				std::pow(Position.y - attraction->GetPosition().y, 2));
 
 			// Si la distance est nulle, cela signifie que le visiteur est déjà à l'attraction
-			// Dans ce cas, on évite de diviser par zéro et on assigne un score très bas
 			if (distance == 0) {
-				score = -1;
+				score = std::numeric_limits<double>::infinity(); // Affecter une valeur infinie au score
 			}
 			else {
 				// Calculer le score basé sur la distance et le temps d'attente actuel
-				score = 1 / distance * (1 / attraction->TempsAttenteEstime());
+				if (attraction->TempsAttenteEstime() != 0) {
+					score = 1 / distance * (1 / attraction->TempsAttenteEstime());
+				}
+				else {
+					// Si le temps d'attente estimé est nul, affecter une valeur très basse au score
+					score = std::numeric_limits<double>::lowest();
+				}
 			}
 
 			// Si le score est plus élevé que le meilleur score actuel, mettre à jour l'attraction choisie
