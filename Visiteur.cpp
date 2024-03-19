@@ -9,7 +9,7 @@ Visiteur::Visiteur(std::string nom, std::vector<Attraction>& attractions)
 	Etat = EtatVisiteur::EnDecision;
 	Position = { 0, 0 };
 	for (auto& attraction : attractions) {
-		this->ListeAttractions.push_back(std::make_pair(&attraction, false)); // Utiliser un pointeur vers l'attraction
+		ListeAttractions.push_back(std::make_pair(&attraction, false)); // Marquer chaque attraction comme non visitée
 	}
 }
 
@@ -26,7 +26,7 @@ void Visiteur::ActiverVisiteur() {
 		FaireDecision();
 		break;
 	case EtatVisiteur::EnMarche:
-		std::cout << "Visiteur " << Nom << " est en train de se déplacer vers une attraction" << std::endl;
+		std::cout << "Visiteur " << Nom << " va vers " << Objectif->GetNom() << std::endl;
 		DeplacerVersAttraction();
 		break;
 	case EtatVisiteur::EnFileAttente:
@@ -90,7 +90,7 @@ void Visiteur::FaireDecision() {
 				}
 				else {
 					// Si le temps d'attente estimé est nul, affecter une valeur très basse au score
-					score = std::numeric_limits<double>::lowest();
+					score = std::numeric_limits<double>::max();
 				}
 			}
 
