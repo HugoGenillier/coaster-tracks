@@ -26,7 +26,7 @@ void Visiteur::ActiverVisiteur() {
 		FaireDecision();
 		break;
 	case EtatVisiteur::EnMarche:
-		std::cout << "Visiteur " << Nom << " va vers " << Objectif->GetNom() << std::endl;
+		std::cout << "Visiteur " << Nom << " va vers " << Objectif->GetNom() << "ici " << GetPosition().x << ", " << GetPosition().y << std::endl;
 		DeplacerVersAttraction();
 		break;
 	case EtatVisiteur::EnFileAttente:
@@ -107,6 +107,22 @@ void Visiteur::FaireDecision() {
 		Objectif = meilleureAttraction;
 		Etat = EtatVisiteur::EnMarche; // Changer l'état en EnMarche pour se déplacer vers la meilleure attraction
 	}
+}
+
+void Visiteur::AjouterAttractionVisitee(Attraction* attraction) {
+	// Parcourir le vecteur des attractions du visiteur
+	for (auto& attractionPair : ListeAttractions) {
+		// Si l'attraction correspond à celle visitée
+		if (attractionPair.first == attraction) {
+			// Mettre à jour le booléen associé à cette attraction
+			attractionPair.second = true;
+			break; // Sortir de la boucle une fois que l'attraction a été trouvée
+		}
+	}
+}
+
+void Visiteur::ChangerComportement(EtatVisiteur nouvelEtat) {
+	Etat = nouvelEtat;
 }
 
 std::string Visiteur::GetNom() const {

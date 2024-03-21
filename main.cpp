@@ -8,8 +8,8 @@ int main() {
 	Parc monParc("Parc d'attractions");
 
 	// Création d'attractions avec des files d'attente et des positions
-	Attraction toutatis("Toutatis", 20, 2, { 300, 0 });
-	Attraction discobelix("Discobelix", 50, 7, { 0, 400 });
+	Attraction toutatis("Toutatis", 20, 2, { 30, 0 });
+	Attraction discobelix("Discobelix", 50, 7, { 0, 40 });
 
 	// Ajouter des attractions au parc
 	monParc.AjouterAttraction(toutatis);

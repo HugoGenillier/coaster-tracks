@@ -25,6 +25,8 @@ public:
 	void DeplacerVersAttraction();
 	void FaireDecision();
 	std::string GetNom() const;
+	void AjouterAttractionVisitee(Attraction* attraction);
+	void ChangerComportement(EtatVisiteur nouvelEtat);
 	const Coordonnees& GetPosition() const {
 		return Position;
 	}

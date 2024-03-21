@@ -81,7 +81,12 @@ void Attraction::AvancerTour() {
 			int visiteursAEmbarquer = std::min(static_cast<int>(fileAttenteNonConst.size()), Capacite);
 			for (int i = 0; i < visiteursAEmbarquer; ++i) {
 				// Retirer le visiteur en tête de file
+				Visiteur* visiteur = fileAttenteNonConst.front();
 				fileAttenteNonConst.pop();
+				// Mettre à jour l'attraction visitée par le visiteur
+				visiteur->AjouterAttractionVisitee(this);
+				// Changer le comportement du visiteur de l'état d'attente à l'état de prise de décision
+				visiteur->ChangerComportement(EtatVisiteur::EnDecision);
 			}
 
 			// Remplacer la file d'attente actuelle par la nouvelle file d'attente modifiée
