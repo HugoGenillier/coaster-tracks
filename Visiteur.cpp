@@ -22,15 +22,15 @@ void Visiteur::AfficherDetails() const {
 void Visiteur::ActiverVisiteur() {
 	switch (Etat) {
 	case EtatVisiteur::EnDecision:
-		std::cout << "Visiteur " << Nom << " est en train de faire une décision" << std::endl;
+		//std::cout << "Visiteur " << Nom << " est en train de faire une décision" << std::endl;
 		FaireDecision();
 		break;
 	case EtatVisiteur::EnMarche:
-		std::cout << "Visiteur " << Nom << " va vers " << Objectif->GetNom() << "ici " << GetPosition().x << ", " << GetPosition().y << std::endl;
+		//std::cout << "Visiteur " << Nom << " va vers " << Objectif->GetNom() << " position : " << GetPosition().x << ", " << GetPosition().y << std::endl;
 		DeplacerVersAttraction();
 		break;
 	case EtatVisiteur::EnFileAttente:
-		std::cout << "Visiteur " << Nom << " est en file d'attente" << std::endl;
+		//std::cout << "Visiteur " << Nom << " est en file d'attente" << std::endl;
 		TempsAttendu += 1; // Incrémenter le temps d'attente du visiteur
 		break;
 	default:
