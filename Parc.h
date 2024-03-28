@@ -11,6 +11,7 @@
 #include <thread>
 #include <mutex>
 using namespace std;
+#include <SFML/Graphics.hpp>
 
 // Définition des couleurs
 #define RESET   "\033[0m"
@@ -31,7 +32,7 @@ public:
 	// Méthode publique
 	void AfficherDetails() const;
 
-	void simulerJournee(int heureOuverture, int heureFermeture);
+	void simulerJournee(int heureOuverture, int heureFermeture, sf::RenderWindow& window); 
 
 	void AjouterAttraction(const Attraction& attraction);
 

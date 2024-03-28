@@ -7,4 +7,5 @@
 #include "Horloge.h"
 #include <thread>
 #include <iostream>
+#include <SFML/Graphics.hpp>
 using namespace std;
