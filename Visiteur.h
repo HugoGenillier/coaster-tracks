@@ -6,7 +6,9 @@
 #include "Structure.hpp"
 #include <utility> // pour std::pair
 #include <iostream>
-
+#include <algorithm> // Pour utiliser std::random_shuffle
+#include <ctime>     // Pour initialiser le générateur de nombres aléatoires
+#include <random>
 // Inclure l'en-tête de la classe Attraction
 #include "Attraction.h"
 
@@ -17,7 +19,7 @@ class Visiteur {
 public:
 	// Constructeur
 	Visiteur();
-	Visiteur(std::string nom, std::vector<Attraction>& attractions);
+	Visiteur(std::string nom,std::vector<Attraction>& attractions);
 
 	// Méthodes publiques
 	void AfficherDetails() const;
@@ -40,7 +42,7 @@ private:
 	int TempsAttendu;
 	Attraction* Objectif;
 	EtatVisiteur Etat;
-	std::vector<std::pair<Attraction*, bool>> ListeAttractions;
+	std::vector<std::tuple<Attraction*, bool, bool>> ListeAttractions;
 };
 
 #endif // VISITEUR_H
