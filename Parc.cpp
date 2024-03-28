@@ -31,12 +31,13 @@ void Parc::simulerJournee(int heureOuverture, int heureFermeture) {
 		std::system("cls");
 		std::cout << "Heure : " << std::setw(2) << std::setfill('0') << heure << "h"
 			<< std::setw(2) << std::setfill('0') << minute << "\n";
+		std::cout<<"\n";
 
 		// Faire avancer le temps dans chaque attraction
 		for (auto& attraction : Attractions) {
 			attraction.AvancerTour(); // Faire avancer la file d'attente et le temps d'attente estimé de l'attraction
-			std::cout << "Attraction : " << attraction.GetNom() << ", Temps d'attente estimé : " << attraction.TempsAttenteEstime() << " minutes\n";
-			std::cout << "Nombre de visiteurs dans la file d'attente : " << attraction.GetNombreVisiteur() << std::endl;
+			std::cout << "Attraction : " << attraction.GetNom() << " | " << RED << attraction.TempsAttenteEstime() << RESET<<" minutes\n";
+			std::cout<<"\n";
 		}
 
 		// Activer les visiteurs

@@ -1,15 +1,25 @@
 #include "Visiteur.h" // Inclure le fichier d'en-tête de Visiteur avant tout autre fichier d'en-tête
 #include "Attraction.h"
 
-
-Visiteur::Visiteur(std::string nom, std::vector<Attraction>& attractions)
-{
+Visiteur::Visiteur(std::string nom, std::vector<Attraction>& attractions) {
 	Nom = nom;
 	TempsAttendu = 0;
 	Etat = EtatVisiteur::EnDecision;
 	Position = { 0, 0 };
+
+	// Initialiser ListeAttractions avec toutes les attractions et marquer chaque attraction comme non visitée et non favorite
 	for (auto& attraction : attractions) {
-		ListeAttractions.push_back(std::make_pair(&attraction, false)); // Marquer chaque attraction comme non visitée
+		ListeAttractions.push_back(std::make_tuple(&attraction, false, false));
+	}
+
+	// Choisir trois attractions au hasard et les marquer comme favorites
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<size_t> dist(0, ListeAttractions.size() - 1);
+
+	for (int i = 0; i < 3; ++i) {
+		size_t randomIndex = dist(gen);
+		std::get<2>(ListeAttractions[randomIndex]) = true;
 	}
 }
 
@@ -69,9 +79,12 @@ void Visiteur::FaireDecision() {
 	Attraction* meilleureAttraction = nullptr;
 	double meilleurScore = -1; // Initialiser à un score très bas
 
-	for (auto& attractionPair : ListeAttractions) {
-		Attraction* attraction = attractionPair.first;
-		if (!attractionPair.second) { // Vérifier si l'attraction n'a pas encore été visitée
+	for (auto& attractionTuple : ListeAttractions) {
+		Attraction* attraction = std::get<0>(attractionTuple);
+		bool estDejaVisitee = std::get<1>(attractionTuple);
+		bool estFavorite = std::get<2>(attractionTuple); // Ajout de cette fonction pour vérifier si l'attraction est favorite
+
+		if (!estDejaVisitee) { // Vérifier si l'attraction n'a pas encore été visitée
 			// Calculer le score d'attractivité de cette attraction
 			double score = 0.0;
 
@@ -86,12 +99,18 @@ void Visiteur::FaireDecision() {
 			else {
 				// Calculer le score basé sur la distance et le temps d'attente actuel
 				if (attraction->TempsAttenteEstime() != 0) {
-					score = 1 / distance * (1 / attraction->TempsAttenteEstime());
+					score = 1 / distance * (1 / (5 * attraction->TempsAttenteEstime()));
 				}
 				else {
 					// Si le temps d'attente estimé est nul, affecter une valeur très basse au score
 					score = std::numeric_limits<double>::max();
 				}
+			}
+
+			// Appliquer un poids supplémentaire si l'attraction est favorite
+			if (estFavorite) {
+				score+=1/1000;
+				score *= 10;
 			}
 
 			// Si le score est plus élevé que le meilleur score actuel, mettre à jour l'attraction choisie
@@ -111,11 +130,11 @@ void Visiteur::FaireDecision() {
 
 void Visiteur::AjouterAttractionVisitee(Attraction* attraction) {
 	// Parcourir le vecteur des attractions du visiteur
-	for (auto& attractionPair : ListeAttractions) {
+	for (auto& attractionTuple : ListeAttractions) {
 		// Si l'attraction correspond à celle visitée
-		if (attractionPair.first == attraction) {
+		if (std::get<0>(attractionTuple) == attraction) {
 			// Mettre à jour le booléen associé à cette attraction
-			attractionPair.second = true;
+			std::get<1>(attractionTuple) = true;
 			break; // Sortir de la boucle une fois que l'attraction a été trouvée
 		}
 	}
