@@ -4,8 +4,6 @@
 #include "Horloge.h"
 
 int main() {
-	// Créer une fenêtre SFML
-	sf::RenderWindow window(sf::VideoMode(800, 600), "Parc Asterix");
 
 	int nombreVisiteurs;
 	int heureOuverture;
@@ -101,6 +99,9 @@ int main() {
 		visiteurs.push_back(visiteur);
 		monParc.AjouterVisiteur(visiteur);
 	}
+
+	// Créer une fenêtre SFML
+	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Parc Asterix");
 
 	// Simulation de la journée
 	monParc.simulerJournee(heureOuverture, heureFermeture, window);

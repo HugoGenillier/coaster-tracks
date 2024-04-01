@@ -32,6 +32,7 @@ public:
 	const Coordonnees& GetPosition() const {
 		return Position;
 	}
+	std::string GetActions() const;
 
 	// Destructeur
 	~Visiteur();

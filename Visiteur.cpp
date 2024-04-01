@@ -99,7 +99,7 @@ void Visiteur::FaireDecision() {
 			else {
 				// Calculer le score basé sur la distance et le temps d'attente actuel
 				if (attraction->TempsAttenteEstime() != 0) {
-					score = 1 / distance * (1 / (5 * attraction->TempsAttenteEstime()));
+					score = 1 / distance * (1 / (8 * attraction->TempsAttenteEstime()));
 				}
 				else {
 					// Si le temps d'attente estimé est nul, affecter une valeur très basse au score
@@ -146,6 +146,27 @@ void Visiteur::ChangerComportement(EtatVisiteur nouvelEtat) {
 
 std::string Visiteur::GetNom() const {
 	return Nom;
+}
+
+std::string Visiteur::GetActions() const {
+	std::string actions;
+
+	switch (Etat) {
+	case EtatVisiteur::EnDecision:
+		actions = "En train de faire une décision";
+		break;
+	case EtatVisiteur::EnMarche:
+		actions = "En marche vers l'attraction : " + Objectif->GetNom();
+		break;
+	case EtatVisiteur::EnFileAttente:
+		actions = "En file d'attente à l'attraction : " + Objectif->GetNom();
+		break;
+	default:
+		actions = "État inconnu";
+		break;
+	}
+
+	return actions;
 }
 
 Visiteur::~Visiteur() {}
