@@ -15,7 +15,10 @@ public:
 
 private:
 	std::chrono::system_clock::time_point tempsActuel;
+	//Heure d'ouverture du parc
 	int heureDebut;
+	//Heure de fermeture du parc
 	int heureFin;
+	//Savoir si l'horloge tourne d'elle même
 	bool running;
 };
