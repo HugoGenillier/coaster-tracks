@@ -4,20 +4,22 @@
 
 #include <cmath>
 
+//Ce fichier est dédié aux structures de données mises en place comme le système de coordonées ou bien les états des visiteurs
+
 // Structure Coordonnees
 struct Coordonnees {
 	double x;
 	double y;
 
-	// Méthode pour calculer la distance entre deux points
+	// Méthode pour calculer la distance entre deux points du parc
 	int distance(const Coordonnees& autre) const {
-		// Utilisation de la formule de distance euclidienne entre deux points dans un plan
+		// calcul de la distance euclidienne entre deux points dans un plan
 		double distance = sqrt((x - autre.x) * (x - autre.x) + (y - autre.y) * (y - autre.y));
-		// Arrondir à l'entier le plus proche
+		// Arrondir à l'entier le plus proche pour ne pas dépasser une attraction dans les déplacements par exemple
 		return static_cast<int>(round(distance));
 	}
 
-	// Surcharge de l'opérateur ==
+	// Surcharge de l'opérateur "==" pour permettre la comparaison de coordonnées
 	bool operator==(const Coordonnees& autre) const {
 		return x == autre.x && y == autre.y;
 	}

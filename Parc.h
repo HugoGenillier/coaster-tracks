@@ -11,35 +11,23 @@
 #include <thread>
 #include <mutex>
 using namespace std;
-#include <SFML/Graphics.hpp>
-
-// Définition des couleurs
-#define RESET   "\033[0m"
-#define RED     "\033[31m"      
-#define GREEN   "\033[32m"      
-#define YELLOW  "\033[33m"      
-#define BLUE    "\033[34m"    
-#define MAGENTA "\033[35m"     
-#define CYAN    "\033[36m"      
-#define WHITE   "\033[37m"      
-
+#include <SFML/Graphics.hpp> 
 
 class Parc {
 public:
 	// Constructeur
 	Parc(std::string nom);
 
-	// Méthode publique
 	void AfficherDetails() const;
-
 	void simulerJournee(int heureOuverture, int heureFermeture, sf::RenderWindow& window); 
-
 	void AjouterAttraction(const Attraction& attraction);
 
+	//Getter pour avoir la liste des attractions du parc
 	std::vector<Attraction>& GetAttractions() {
 		return Attractions;
 	}
 
+	//Méthode pour ajouter un visiteur dans le parc
 	void AjouterVisiteur(const Visiteur& visiteur) {
 		Visiteurs.push_back(visiteur);
 	}
@@ -50,11 +38,13 @@ public:
 	~Parc();
 
 private:
-	// Membres privés
 	std::string Nom;
+	//liste des visiteurs
 	std::vector<Visiteur> Visiteurs;
+	//liste des attractions
 	std::vector<Attraction> Attractions;
-	std::mutex mutexHorloge; // Mutex pour synchroniser l'accès à l'horloge
+	//Mutex pour synchroniser l'accès à l'horloge car elle s'exécute dans un thread à part
+	std::mutex mutexHorloge;
 };
 
 #endif // PARC_HPP
